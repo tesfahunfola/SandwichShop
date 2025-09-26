@@ -19,33 +19,39 @@ public class SandwichShop {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Size of your sancwich: \n  1. Regular: base price $5.45 \n  2. Large: base price $8.95");
-        String command = scanner.nextLine();
+        int command = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Would like the sandwich 'loaded' (yes/no)? ");
+        String loaded = scanner.nextLine();
 
         System.out.println("Enter your age: ");
         int age = scanner.nextInt();
 
-        if (command.equals("1")){
-            if (age <= 17){
-                System.out.println("Regular: base price $4.905 ");
-            }else if(age >= 65){
-                System.out.println("Regular: base price $4.36");
-            }else {
-                System.out.println("Regular: base price $5.45");
-            }
+
+        double totalPrice = 0;
+
+        if (command == 1){
+            totalPrice = 5.45;
 
         }
-        else if(command.equals("2")){
-            if (age <= 17){
-                System.out.println("Regular: base price $8.055 ");
-            }else if(age >= 65){
-                System.out.println("Regular: base price $7.16");
-            }else {
-                System.out.println("Large: base price $8.95");
-            }
+        else if(command == 2){
+           totalPrice = 8.95;
+
         }else {
             System.out.println("Invalid input");
         }
+        if (command == 1 && loaded.equalsIgnoreCase("yes")){
+            totalPrice += 1;
+        }else if(command == 2 && loaded.equalsIgnoreCase("no")){
+            totalPrice += 1.75;
+        }
 
-
+        if(age<18){
+            totalPrice = totalPrice * 0.9;
+        }else if(age >65){
+            totalPrice = totalPrice * 0.8;
+        }
+        System.out.printf("The Total price is: %.2f ", totalPrice);
     }
 }
